@@ -4,7 +4,7 @@ defmodule USAddress.MixProject do
   def project do
     [
       app: :us_address,
-      compilers: [:make] ++ Mix.compilers,
+      compilers: [:make] ++ Mix.compilers(),
       aliases: aliases(),
       version: "0.1.0",
       elixir: "~> 1.7",
@@ -36,7 +36,7 @@ defmodule Mix.Tasks.Compile.Make do
 
   def run(_) do
     {result, _error_code} = System.cmd("make", [], stderr_to_stdout: true)
-    Mix.shell.info result
+    Mix.shell().info(result)
 
     :ok
   end
@@ -47,7 +47,7 @@ defmodule Mix.Tasks.Clean.Make do
 
   def run(_) do
     {result, _error_code} = System.cmd("make", ["clean"], stderr_to_stdout: true)
-    Mix.shell.info result
+    Mix.shell().info(result)
 
     :ok
   end

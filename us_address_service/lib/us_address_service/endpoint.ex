@@ -7,7 +7,7 @@ defmodule USAddressService.Endpoint do
   use Plug.Router
 
   plug(Plug.Logger)
-  #plug(LoggerJSON.Plug)
+  # plug(LoggerJSON.Plug)
   plug(:match)
   plug(Plug.Parsers, parsers: [:json], json_decoder: Jason)
   plug(:dispatch)
@@ -32,28 +32,24 @@ defmodule USAddressService.Endpoint do
   end
 
   defp verify_address(address) when is_map(address) do
-    json = USAddress.verify(address)
-           |> Jason.encode!()
+    json = USAddress.verify(address) |> Jason.encode!()
     {200, json}
   end
 
   defp verify_address(_) do
-    json = %{error: "Empty request / missing parameters"}
-           |> Jason.encode!
+    json = %{error: "Empty request / missing parameters"} |> Jason.encode!()
     {422, json}
   end
 
   defp address_version() do
-    json = USAddress.version()
-           |> Jason.encode!()
+    json = USAddress.version() |> Jason.encode!()
     {200, json}
   end
 
   # A catchall route, 'match' will match no matter the request method,
   # so a response is always returned, even if there is no route to match.
   match _ do
-    message = %{error: "Invalid route."}
-              |> Jason.encode!()
+    message = %{error: "Invalid route."} |> Jason.encode!()
     send_resp(conn, 404, message)
   end
 end

@@ -13,8 +13,7 @@ defmodule USAddress.Server do
   end
 
   def handle_call({:verify, address_map}, _from, us_address) do
-    result = us_address
-             |> USAddress.Nif.verify(address_map)
+    result = USAddress.Nif.verify(us_address, address_map)
     {:reply, result, us_address}
   end
 

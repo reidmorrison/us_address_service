@@ -1,5 +1,5 @@
 # See README.md for details on using this file.
-FROM elixir:1.17
+FROM --platform=amd64 elixir:1.17
 WORKDIR /src
 ARG MD_LICENSE=""
 ENV MD_LICENSE=${MD_LICENSE} \

@@ -13,17 +13,16 @@ defmodule USAddressService.MixProject do
 
   def application do
     [
-      extra_applications: [:logger, :plug_cowboy, :jason, :logger_json, :us_address],
+      extra_applications: [:logger, :plug_cowboy, :jason, :us_address],
       mod: {USAddressService.Application, []}
     ]
   end
 
   defp deps do
     [
-      {:bugsnag, "~> 2.0.0", only: :prod},
-      {:plug_cowboy, "~> 2.1"},
-      {:logger_json, "~> 4.0"},
-      {:jason, "~> 1.2"},
+      {:bugsnag, "~> 3.0", only: :prod},
+      {:plug_cowboy, "~> 2.7"},
+      {:jason, "~> 1.4"},
       {:us_address, path: "../us_address"}
     ]
   end

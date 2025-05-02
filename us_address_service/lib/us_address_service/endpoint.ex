@@ -7,7 +7,6 @@ defmodule USAddressService.Endpoint do
   use Plug.Router
 
   plug(Plug.Logger)
-  # plug(LoggerJSON.Plug)
   plug(:match)
   plug(Plug.Parsers, parsers: [:json], json_decoder: Jason)
   plug(:dispatch)

@@ -17,5 +17,3 @@ defmodule USAddress do
     )
   end
 end
-
-

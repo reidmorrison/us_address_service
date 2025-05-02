@@ -1,5 +1,5 @@
 # See README.md for details on using this file.
-FROM elixir:1.11
+FROM --platform=amd64 elixir:1.17
 WORKDIR /src
 ARG MD_LICENSE=""
 ENV MD_LICENSE=${MD_LICENSE} \
@@ -10,10 +10,10 @@ ENV MD_LICENSE=${MD_LICENSE} \
 # Copy Melissa Data Files for better performance
 COPY ./dqs/data /opt/data
 COPY ./dqs/libmdAddr.so /usr/lib
-COPY ./dqs/*.h postal_address/src/
+COPY ./dqs/*.h us_address/src/
 
 RUN set -ex \
-	&& apt-get update \
-	&& apt-get install -y apache2-utils
+    && apt-get update \
+    && apt-get install -y apache2-utils
 
 CMD ["bash"]

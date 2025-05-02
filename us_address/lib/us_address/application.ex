@@ -15,6 +15,7 @@ defmodule USAddress.Application do
       name: USAddress.Supervisor,
       strategy: :one_for_one
     ]
+
     Supervisor.start_link(children, opts)
   end
 

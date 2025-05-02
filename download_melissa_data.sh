@@ -19,7 +19,7 @@ else
   Dir.mkdir(dqs_path)
   Dir.chdir(dqs_path) do
     `wget -O dqs.zip "#{md_web_url}"`
-    `unzip dqs.zip`
+    `unzip dqs.zip -d #{dqs_path}`
   end
 end
 
@@ -27,6 +27,6 @@ puts "Extracting required DQS files into: #{extract_path}"
 Dir.mkdir(extract_path) unless Dir.exist?(extract_path)
 Dir.mkdir(data_path) unless Dir.exist?(data_path)
 `cp #{dqs_path}/address/data/mdAddr.* #{data_path}`
-`cp #{dqs_path}/address/linux/gcc41_64bit/libmdAddr.so #{extract_path}`
-`cp #{dqs_path}/address/linux/gcc41_64bit/*.h #{extract_path}`
+`cp #{dqs_path}/address/linux/gcc48_64bit/libmdAddr.so #{extract_path}`
+`cp #{dqs_path}/address/linux/gcc48_64bit/*.h #{extract_path}`
 `chmod -R +w #{extract_path}`

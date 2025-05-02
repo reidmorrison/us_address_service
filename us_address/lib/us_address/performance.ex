@@ -8,7 +8,7 @@ defmodule USAddress.Performance do
 
   defp run(address, count) do
     1..count
-    |> Enum.map(fn _-> async_call(address) end)
+    |> Enum.map(fn _ -> async_call(address) end)
     |> Enum.each(fn task -> await_and_inspect(task) end)
   end
 
@@ -19,13 +19,13 @@ defmodule USAddress.Performance do
   defp await_and_inspect(task) do
     time = seconds(fn -> Task.await(task, @timeout) end)
     if time > 0.1, do: IO.inspect(time)
-#    IO.inspect(:poolboy.status(USAddress.Application.pool_name()))
+    #    IO.inspect(:poolboy.status(USAddress.Application.pool_name()))
   end
 
   # Microseconds
   defp measure(function) do
     function
-    |> :timer.tc
+    |> :timer.tc()
     |> elem(0)
   end
 

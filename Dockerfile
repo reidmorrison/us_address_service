@@ -38,9 +38,7 @@ RUN cd us_address_service \
 FROM  debian:buster
 
 ARG MD_LICENSE=""
-ARG BUGSNAG_API_KEY=""
 ENV MD_LICENSE=${MD_LICENSE} \
-    BUGSNAG_API_KEY=${BUGSNAG_API_KEY} \
     LANG=C.UTF-8 \
     HOME=/opt/app
 WORKDIR $HOME

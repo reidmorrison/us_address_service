@@ -21,7 +21,7 @@ In order to build the US Address Service you need to purchase a Melissa Data, Da
 Contact Melissa Data to obtain the license. The product that needs to be purchased is called `AddressObject`.
 
 They will also give you a URL to download the files from, similar to:
-`http://www.melissadata.com/service/product_download.aspx?u=.............&p=....`
+`https://releases.melissadata.net/download/product/latest/DataQualitySuite?id=...`
 
 This URL needs to be supplied below in the environment variable `MD_WEB_URL` to download the software.
 
@@ -29,7 +29,7 @@ This URL needs to be supplied below in the environment variable `MD_WEB_URL` to 
 
 Set the download URL environment variable using the actual value from above:
 
-    export MD_WEB_URL="http://www.melissadata.com/service/product_download.aspx?u=..............&p=...."
+    export MD_WEB_URL="https://releases.melissadata.net/download/product/latest/DataQualitySuite?id=..."
 
 Set the license obtained above as an environment variable:
 
@@ -58,15 +58,7 @@ Download and Install [Docker Desktop](https://www.docker.com/products/docker-des
 
 Build production docker image, including the Melissa Data software downloaded in the previous section.
 
-Building without support for Bugsnag:
-
     docker build --build-arg MD_LICENSE=$MD_LICENSE -t us_address_service .
-
-Alternatively, to build with support for sending errors to BugSnag, obtain the Bugsnag application key and set the
-`BUGSNAG_API_KEY` environment variable:
-
-    export BUGSNAG_API_KEY="..........."
-    docker build --build-arg MD_LICENSE=$MD_LICENSE --build-arg BUGSNAG_API_KEY=$BUGSNAG_API_KEY -t us_address_service .
 
 Note:
 - Tests are run during the above build steps to ensure that the source code is working as expected against the 
@@ -138,15 +130,16 @@ This section only applies when contributing to the US Address Service Elixir pro
 Since the Melissa Data C libraries cannot run on Mac or Windows, all development should be done within a 
 docker container.
 
-Download and Install [Docker Desktop](https://www.docker.com/products/docker-desktop) (If not already installed)
+Download and install docker if not already installed. Or use Colima:
+    `brew install colima docker`
 
 Build development docker image
 
-    docker build --build-arg MD_LICENSE=$MD_LICENSE -t us_address_development --file development.Dockerfile .
+    docker build --platform linux/amd64 --build-arg MD_LICENSE=$MD_LICENSE -t us_address_development --file development.Dockerfile .
 
 Launch development console:
 
-    docker run -it --rm -p 4000:4000 --volume `pwd`:/src us_address_development bash
+    docker run --platform linux/amd64 -it --rm -p 4000:4000 --volume `pwd`:/src us_address_development bash
 
 Install dependencies
 

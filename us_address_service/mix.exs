@@ -20,7 +20,6 @@ defmodule USAddressService.MixProject do
 
   defp deps do
     [
-      {:bugsnag, "~> 3.0", only: :prod},
       {:plug_cowboy, "~> 2.7"},
       {:jason, "~> 1.4"},
       {:us_address, path: "../us_address"}

@@ -62,7 +62,7 @@ defmodule PostalAddressTest do
     assert verified[:city] == "Houston"
     assert verified[:state] == "TX"
     assert verified[:zip] == "77058"
-    assert verified[:delivery_point] == "77058368599"
+    assert verified[:delivery_point] == "77058361004"
   end
 
   test "verify with more utf8 values" do

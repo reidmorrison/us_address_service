@@ -58,11 +58,12 @@ Download and Install [Docker Desktop](https://www.docker.com/products/docker-des
 
 Build production docker image, including the Melissa Data software downloaded in the previous section.
 
-    docker build --build-arg MD_LICENSE=$MD_LICENSE -t us_address_service .
+    docker build --platform linux/amd64 --build-arg MD_LICENSE=$MD_LICENSE -t us_address_service .
 
 Note:
 - Tests are run during the above build steps to ensure that the source code is working as expected against the 
   version of the Melissa Data software that was downloaded.
+- Melissa Data only works on x86 linux. Trying the build on Apple Silcon often causes issues, even with the `--platform linux/amd64` flag.
 
 ### Verify Production Docker Image
 
@@ -130,8 +131,7 @@ This section only applies when contributing to the US Address Service Elixir pro
 Since the Melissa Data C libraries cannot run on Mac or Windows, all development should be done within a 
 docker container.
 
-Download and install docker if not already installed. Or use Colima:
-    `brew install colima docker`
+Download and install docker desktop if not already installed.
 
 Build development docker image
 
@@ -144,6 +144,7 @@ Launch development console:
 Install dependencies
 
     cd us_address_service
+    rm -Rf _build deps
     mix local.hex --force
     mix local.rebar --force
     mix deps.get

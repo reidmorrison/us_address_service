@@ -1,7 +1,7 @@
 #
 # Stage 1: Build and test.
 #
-FROM elixir:1.17 as build
+FROM elixir:1.17 AS build
 WORKDIR /opt/build
 ARG MD_LICENSE=""
 ENV MD_LICENSE=${MD_LICENSE} \
@@ -35,7 +35,7 @@ RUN cd us_address_service \
 #
 # Stage 2: Build final image copying released binaries from build stage.
 #
-FROM  debian:buster
+FROM debian:bookworm
 
 ARG MD_LICENSE=""
 ENV MD_LICENSE=${MD_LICENSE} \
@@ -45,7 +45,7 @@ WORKDIR $HOME
 
 RUN set -ex \
     && apt-get update \
-    && apt-get install -y --no-install-recommends libssl1.1
+    && apt-get install -y --no-install-recommends libssl3
 
 COPY --from=build /opt/build/us_address_service/_build/prod/rel/us_address_service ./
 COPY --from=build /opt/data /opt/data
